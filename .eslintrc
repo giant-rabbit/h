@@ -8,5 +8,8 @@
     "prefer-arrow-callback": "error",
     "prefer-const": ["error", { "destructuring": "all" }],
     "space-before-blocks": "error"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017
   }
 }
