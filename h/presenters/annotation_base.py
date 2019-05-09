@@ -37,6 +37,13 @@ class AnnotationBasePresenter(object):
             return ""
 
     @property
+    def color(self):
+        if self.annotation.color:
+            return self.annotation.color
+        else:
+            return "green"
+
+    @property
     def tags(self):
         if self.annotation.tags:
             return self.annotation.tags

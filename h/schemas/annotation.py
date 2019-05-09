@@ -76,6 +76,7 @@ class AnnotationSchema(JSONSchema):
                 "required": ["read"],
             },
             "references": {"type": "array", "items": {"type": "string"}},
+            "color": {"type": "string"},
             "tags": {"type": "array", "items": {"type": "string"}},
             "target": {
                 "type": "array",
@@ -122,6 +123,7 @@ class CreateAnnotationSchema(object):
         new_appstruct["target_uri"] = uri
 
         new_appstruct["text"] = appstruct.pop("text", "")
+        new_appstruct["color"] = appstruct.pop("color", "")
         new_appstruct["tags"] = appstruct.pop("tags", [])
         new_appstruct["groupid"] = appstruct.pop("group", "__world__")
         new_appstruct["references"] = appstruct.pop("references", [])
@@ -194,7 +196,7 @@ class UpdateAnnotationSchema(object):
 
         # Fields that are allowed to be updated and that have the same internal
         # and external name.
-        for key in ["text", "tags"]:
+        for key in ["text", "color", "tags"]:
             if key in appstruct:
                 new_appstruct[key] = appstruct.pop(key)
 
@@ -361,6 +363,12 @@ class SearchParamsSchema(colander.Schema):
         colander.SchemaNode(colander.String()),
         missing=colander.drop,
         description="Alias of tag.",
+    )
+    color = colander.SchemaNode(
+        colander.Sequence(),
+        colander.SchemaNode(colander.String()),
+        missing=colander.drop,
+        description="Limit the results to annotations of this highlight color.",
     )
     text = colander.SchemaNode(
         colander.Sequence(),

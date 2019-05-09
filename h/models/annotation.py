@@ -75,6 +75,9 @@ class Annotation(Base):
     #: The Markdown-rendered and HTML-sanitized textual body of the annotation.
     _text_rendered = sa.Column("text_rendered", sa.UnicodeText)
 
+    #: The highlight color of the annotation.
+    color = sa.Column("color", sa.UnicodeText)
+
     #: The tags associated with the annotation.
     tags = sa.Column(
         MutableList.as_mutable(pg.ARRAY(sa.UnicodeText, zero_indexes=True))

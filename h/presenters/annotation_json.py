@@ -46,6 +46,7 @@ class AnnotationJSONPresenter(AnnotationBasePresenter):
             "user": self.annotation.userid,
             "uri": self.annotation.target_uri,
             "text": self.text,
+            "color": self.color,
             "tags": self.tags,
             "group": self.annotation.groupid,
             "permissions": self.permissions,
