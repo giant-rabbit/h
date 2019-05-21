@@ -31,6 +31,7 @@ class AuthenticationPolicy(object):
         self.fallback_policy = fallback_policy
 
     def authenticated_userid(self, request):
+        # WHERE TO ADD LOGIC FOR READING DRUPAL SESSION COOKIE FOR LOGGIN IN.
         if _is_api_request(request):
             return self.api_policy.authenticated_userid(request)
 
