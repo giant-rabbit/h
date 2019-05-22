@@ -78,7 +78,7 @@ def devserver(https, web, ws, worker, assets, beat):
         os.environ["WEBSOCKET_URL"] = "wss://localhost:5001/ws"
     else:
         gunicorn_args = ""
-        os.environ["APP_URL"] = "http://localhost:5000"
+        os.environ["APP_URL"] = "http://hypothesis.myshakespeare.com"
         os.environ["WEBSOCKET_URL"] = "ws://localhost:5001/ws"
 
     m = Manager()

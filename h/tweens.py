@@ -126,8 +126,6 @@ def security_header_tween_factory(handler, registry):
         resp.headers[
             "Referrer-Policy"
         ] = "origin-when-cross-origin, strict-origin-when-cross-origin"
-        # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection
-        resp.headers["X-XSS-Protection"] = "1; mode=block"
         return resp
 
     return security_header_tween

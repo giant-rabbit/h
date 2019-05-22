@@ -51,7 +51,7 @@ def sidebar_app(request, extra=None):
     websocket_url = settings.get("h.websocket_url")
 
     app_config = {
-        "apiUrl": request.route_url("api.index"),
+        "apiUrl": "https://hypothesis.myshakespeare.com/api/",
         "authDomain": request.default_authority,
         "oauthClientId": settings.get("h.client_oauth_id"),
         "release": __version__,
