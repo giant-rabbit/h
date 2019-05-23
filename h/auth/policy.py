@@ -32,30 +32,21 @@ class AuthenticationPolicy(object):
 
     def authenticated_userid(self, request):
         # WHERE TO ADD LOGIC FOR READING DRUPAL SESSION COOKIE FOR LOGGIN IN.
-        if _is_api_request(request):
-            return self.api_policy.authenticated_userid(request)
-
-        return self.fallback_policy.authenticated_userid(request)
-
-    def unauthenticated_userid(self, request):
-        if _is_api_request(request):
-            return self.api_policy.unauthenticated_userid(request)
-        return self.fallback_policy.unauthenticated_userid(request)
+        return "acct:paradigm@localhost"
 
     def effective_principals(self, request):
-        if _is_api_request(request):
-            return self.api_policy.effective_principals(request)
-        return self.fallback_policy.effective_principals(request)
-
-    def remember(self, request, userid, **kw):
-        if _is_api_request(request):
-            return self.api_policy.remember(request, userid, **kw)
-        return self.fallback_policy.remember(request, userid, **kw)
-
-    def forget(self, request):
-        if _is_api_request(request):
-            return self.api_policy.forget(request)
-        return self.fallback_policy.forget(request)
+        # If not authenticated, principals should be set to:
+        # [pyramid.security.Everyone]
+        # Otherwise, we need to include their userid, groups they belong to and
+        # their client_authority.
+        principals = [
+            pyramid.security.Authenticated,
+            "acct:paradigm@localhost",
+            "group:q53zx2xD",
+            #"group:__admin__",
+            "client_authority:localhost"
+        ]
+        return principals
 
 
 @interface.implementer(interfaces.IAuthenticationPolicy)
